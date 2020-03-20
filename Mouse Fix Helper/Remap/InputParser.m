@@ -31,6 +31,7 @@
 #import "../SupportFiles/External/CGSInternal/CGSHotKeys.h"
 #import "../SupportFiles/External/SensibleSideButtons/TouchEvents.h"
 #import "TouchSimulator.h"
+#include <Carbon/Carbon.h>
 
 @implementation InputParser
 
@@ -164,10 +165,22 @@ CG_EXTERN CGError CGSSetSymbolicHotKeyValue(CGSSymbolicHotKey hotKey, unichar ke
     }
     
     // post keyevents corresponding to shk
-    CGEventRef shortcutDown = CGEventCreateKeyboardEvent(NULL, virtualKeyCode, TRUE);
-    CGEventRef shortcutUp = CGEventCreateKeyboardEvent(NULL, virtualKeyCode, FALSE);
-    CGEventSetFlags(shortcutDown, (CGEventFlags)modifierFlags); // only type casting to silence warnings
-    CGEventSetFlags(shortcutUp, (CGEventFlags)modifierFlags);
+    CGEventRef shortcutDown;
+    CGEventRef shortcutUp;
+    if (shk == 79) {
+        shortcutDown = CGEventCreateKeyboardEvent(NULL, kVK_PageDown, TRUE);
+        shortcutUp = CGEventCreateKeyboardEvent(NULL, kVK_PageDown, FALSE);
+    }
+    else if (shk == 81) {
+        shortcutDown = CGEventCreateKeyboardEvent(NULL, kVK_PageUp, TRUE);
+        shortcutUp = CGEventCreateKeyboardEvent(NULL, kVK_PageUp, FALSE);
+    }
+    else {
+        shortcutDown = CGEventCreateKeyboardEvent(NULL, virtualKeyCode, TRUE);
+        shortcutUp = CGEventCreateKeyboardEvent(NULL, virtualKeyCode, FALSE);
+        CGEventSetFlags(shortcutDown, (CGEventFlags)modifierFlags); // only type casting to silence warnings
+        CGEventSetFlags(shortcutUp, (CGEventFlags)modifierFlags);
+    }
     CGEventPost(kCGHIDEventTap, shortcutDown);
     CGEventPost(kCGHIDEventTap, shortcutUp);
     CFRelease(shortcutDown);
@@ -175,8 +188,7 @@ CG_EXTERN CGError CGSSetSymbolicHotKeyValue(CGSSymbolicHotKey hotKey, unichar ke
     
     //NSLog(@"sent keyEvents");
     
-    
-    // restore keyEnabled state after 20ms
+    // restore keyEnabled state after 50ms
     if (hotKeyIsEnabled == FALSE) {
 
         NSNumber *shkNS = [NSNumber numberWithInt:shk];

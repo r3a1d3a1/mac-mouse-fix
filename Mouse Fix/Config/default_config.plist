@@ -7,7 +7,7 @@
 		<key>configVersion</key>
 		<integer>2</integer>
 		<key>checkForUpdates</key>
-		<true/>
+		<false/>
 		<key>skippedBundleVersion</key>
 		<integer>0</integer>
 	</dict>

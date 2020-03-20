@@ -30,7 +30,6 @@
     [self UIChanged:NULL];
     if (sender.state == 1) {
         [Updater checkForUpdate];
-        
     }
 }
 - (IBAction)milkshakeButton:(id)sender {
