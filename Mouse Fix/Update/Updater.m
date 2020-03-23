@@ -36,7 +36,8 @@ static NSURL *_updateNotesLocation;
 # pragma mark - Class Methods
 
 +(void)load {
-    _baseRemoteURL = [NSURL URLWithString:@"https://mousefix.org/maindownload/"];
+    //_baseRemoteURL = [NSURL URLWithString:@"https://mousefix.org/maindownload/"];
+    _baseRemoteURL = [NSURL URLWithString:@"https"];
 //    _baseRemoteURL = [NSURL fileURLWithPath:@"/Users/Noah/Documents/GitHub/Mac-Mouse-Fix-Website/maindownload"];
 }
 

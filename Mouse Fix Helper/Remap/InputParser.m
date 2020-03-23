@@ -31,7 +31,6 @@
 #import "../SupportFiles/External/CGSInternal/CGSHotKeys.h"
 #import "../SupportFiles/External/SensibleSideButtons/TouchEvents.h"
 #import "TouchSimulator.h"
-#include <Carbon/Carbon.h>
 
 @implementation InputParser
 
@@ -164,27 +163,38 @@ CG_EXTERN CGError CGSSetSymbolicHotKeyValue(CGSSymbolicHotKey hotKey, unichar ke
         }
     }
     
-    // post keyevents corresponding to shk
-    CGEventRef shortcutDown;
-    CGEventRef shortcutUp;
+    const int scollTriggerCnt = 7;
     if (shk == 79) {
-        shortcutDown = CGEventCreateKeyboardEvent(NULL, kVK_PageDown, TRUE);
-        shortcutUp = CGEventCreateKeyboardEvent(NULL, kVK_PageDown, FALSE);
+        NSNumber *forward = [NSNumber numberWithInt:1];
+        for( int i = 0; i < scollTriggerCnt; ++i) {
+            [NSTimer scheduledTimerWithTimeInterval:0.02 * i
+                                             target:self
+                                           selector:@selector(postEvent:)
+                                           userInfo:forward
+                                            repeats:NO];
+        }
     }
     else if (shk == 81) {
-        shortcutDown = CGEventCreateKeyboardEvent(NULL, kVK_PageUp, TRUE);
-        shortcutUp = CGEventCreateKeyboardEvent(NULL, kVK_PageUp, FALSE);
+        NSNumber *forward = [NSNumber numberWithInt:0];
+        for( int i = 0; i < scollTriggerCnt; ++i) {
+            [NSTimer scheduledTimerWithTimeInterval:0.02 * i
+                                             target:self
+                                           selector:@selector(postEvent:)
+                                           userInfo:forward
+                                            repeats:NO];
+        }
     }
     else {
-        shortcutDown = CGEventCreateKeyboardEvent(NULL, virtualKeyCode, TRUE);
-        shortcutUp = CGEventCreateKeyboardEvent(NULL, virtualKeyCode, FALSE);
+        // post keyevents corresponding to shk
+        CGEventRef shortcutDown = CGEventCreateKeyboardEvent(NULL, virtualKeyCode, TRUE);
+        CGEventRef shortcutUp = CGEventCreateKeyboardEvent(NULL, virtualKeyCode, FALSE);
         CGEventSetFlags(shortcutDown, (CGEventFlags)modifierFlags); // only type casting to silence warnings
         CGEventSetFlags(shortcutUp, (CGEventFlags)modifierFlags);
+        CGEventPost(kCGHIDEventTap, shortcutDown);
+        CGEventPost(kCGHIDEventTap, shortcutUp);
+        CFRelease(shortcutDown);
+        CFRelease(shortcutUp);
     }
-    CGEventPost(kCGHIDEventTap, shortcutDown);
-    CGEventPost(kCGHIDEventTap, shortcutUp);
-    CFRelease(shortcutDown);
-    CFRelease(shortcutUp);
     
     //NSLog(@"sent keyEvents");
     
@@ -202,6 +212,13 @@ CG_EXTERN CGError CGSSetSymbolicHotKeyValue(CGSSymbolicHotKey hotKey, unichar ke
 }
 
 // NSTimer callbacks
+
++(void)postEvent:(NSTimer *)timer {
+    //FIXME: Take into account "Invert" option to avoid reverse assignment
+    CGEventRef scroll = CGEventCreateScrollWheelEvent(NULL, kCGScrollEventUnitLine, 1, [[timer userInfo] intValue] ? -10 : 10);
+    CGEventPost(kCGHIDEventTap, scroll);
+    CFRelease(scroll);
+}
 +(void)disableSHK:(NSTimer *)timer {
     CGSSymbolicHotKey shk = [[timer userInfo] intValue];
     CGSSetSymbolicHotKeyEnabled(shk, FALSE);
