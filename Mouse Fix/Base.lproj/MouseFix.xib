@@ -24,7 +24,7 @@
         <window title="≪ do not localize ≫" autorecalculatesKeyViewLoop="NO" restorable="NO" deferred="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5" userLabel="PrefPane">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="668" height="267"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <view key="contentView" identifier="mainView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="668" height="267"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -94,7 +94,7 @@
                                             <rect key="frame" x="232" y="18" width="29" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Slow" id="GKV-Mh-wiX">
-                                                <font key="font" metaFont="message" size="11"/>
+                                                <font key="font" metaFont="label" size="11"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -103,7 +103,7 @@
                                             <rect key="frame" x="366" y="18" width="26" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Fast" id="xi0-4q-Wib">
-                                                <font key="font" metaFont="message" size="11"/>
+                                                <font key="font" metaFont="label" size="11"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -111,7 +111,7 @@
                                         <button identifier="invertScroll" toolTip="Inverts mouse scrolling direction relative to trackpad scrolling direction." verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ip8-aI-or8">
                                             <rect key="frame" x="452" y="46" width="114" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="check" title="Invert direction" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" state="on" inset="2" id="uNi-ZH-WXu">
+                                            <buttonCell key="cell" type="check" title="Invert direction" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" inset="2" id="uNi-ZH-WXu">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -136,7 +136,7 @@
                                             <rect key="frame" x="299" y="183" width="30" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Click" id="FYX-9Z-Ok7">
-                                                <font key="font" metaFont="message" size="11"/>
+                                                <font key="font" metaFont="label" size="11"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -167,7 +167,7 @@
                                             <rect key="frame" x="495" y="183" width="29" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Hold" id="d0e-E7-HgZ">
-                                                <font key="font" metaFont="message" size="11"/>
+                                                <font key="font" metaFont="label" size="11"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -175,18 +175,18 @@
                                         <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eIj-eG-exO">
                                             <rect key="frame" x="420" y="157" width="180" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="gLf-sd-t5o" id="Moi-Bx-VlN">
+                                            <popUpButtonCell key="cell" type="push" title="Look Up" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" tag="70" imageScaling="proportionallyDown" inset="2" selectedItem="g0j-DR-0Je" id="Moi-Bx-VlN">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="FBp-La-D1V">
                                                     <items>
-                                                        <menuItem title="-" state="on" toolTip="No action." id="gLf-sd-t5o"/>
+                                                        <menuItem title="-" toolTip="No action." id="gLf-sd-t5o"/>
                                                         <menuItem isSeparatorItem="YES" id="pq5-uw-FgV"/>
                                                         <menuItem title="Mission Control" tag="32" id="4MU-HZ-ovV"/>
                                                         <menuItem title="Application windows" tag="33" id="86s-c0-bQd"/>
                                                         <menuItem title="Show Desktop" tag="36" id="EVv-bp-mbA"/>
                                                         <menuItem isSeparatorItem="YES" id="8hK-BK-5D2"/>
-                                                        <menuItem title="Look Up" tag="70" id="g0j-DR-0Je"/>
+                                                        <menuItem title="Look Up" state="on" tag="70" id="g0j-DR-0Je"/>
                                                     </items>
                                                 </menu>
                                             </popUpButtonCell>
@@ -207,7 +207,7 @@
                                             <rect key="frame" x="298" y="136" width="30" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Click" id="q25-k0-Pva">
-                                                <font key="font" metaFont="message" size="11"/>
+                                                <font key="font" metaFont="label" size="11"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -215,14 +215,14 @@
                                         <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hGG-fg-G7L">
                                             <rect key="frame" x="225" y="112" width="180" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <popUpButtonCell key="cell" type="push" title="Side buttons" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="1a7-0y-cIV" id="9Hx-yi-NA0">
+                                            <popUpButtonCell key="cell" type="push" title="Page Up/Down" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" tag="1" imageScaling="proportionallyDown" inset="2" selectedItem="mo5-2i-ROD" id="9Hx-yi-NA0">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="Ao4-cS-trT">
                                                     <items>
-                                                        <menuItem title="Side buttons" state="on" toolTip="Leave button behavior unchanged." id="1a7-0y-cIV"/>
+                                                        <menuItem title="Side buttons" toolTip="Leave button behavior unchanged." id="1a7-0y-cIV"/>
                                                         <menuItem isSeparatorItem="YES" id="4hR-Cg-H2I"/>
-                                                        <menuItem title="Page Up/Down" tag="1" id="mo5-2i-ROD"/>
+                                                        <menuItem title="Page Up/Down" state="on" tag="1" id="mo5-2i-ROD"/>
                                                         <menuItem title="Back and Forward" tag="2" id="VCO-0X-gaQ"/>
                                                     </items>
                                                 </menu>

@@ -37,11 +37,29 @@
 // input parsing
 static CGEventRef   _savedEvent;
 static NSTimer     *_clickAndHoldTimer;
-
+static long long    _lastMiddleClickTime = -1;
+static int          _midClickCnt = 0;       //To avoid filtering out unpressing the button
 
 + (CGEventRef)parse:(int)mouseButton state:(int)state event:(CGEventRef)event {
     
     NSLog(@"parsing input (Input Parser)");
+
+    if ( mouseButton == 3 ) {
+        long long currTimeInMilliseconds = (long long)([[NSDate date] timeIntervalSince1970] * 1000.0);
+        printf( "Middle Click Time: %lld \n", currTimeInMilliseconds );
+        if ( _lastMiddleClickTime > (currTimeInMilliseconds - 300) ){
+            if( !_midClickCnt )
+                _midClickCnt += 1;
+            else {
+                NSLog(@"Middle Click Filtered Out");
+                //May need to do this too:   _midClickCnt = -1;
+                return nil;
+            }
+        } else {
+            _lastMiddleClickTime = currTimeInMilliseconds;
+            _midClickCnt = 0;
+        }
+    }
     
     NSString *keyPath = [NSString stringWithFormat:@"ButtonRemaps.%d.single", mouseButton];
     
