@@ -123,6 +123,8 @@ static AXUIElementRef _systemWideAXUIElement;
 static double   _pxPerMsVelocity        =   0;
 static int      _onePixelScrollsCounter =   0;
 
+static long long  _lastScrollTime  =  -1;
+
 #pragma mark - Interface
 
 static void resetDynamicGlobals() {
@@ -336,10 +338,19 @@ static CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEv
     // check if Scrolling Direction changed
     
     Boolean newScrollDirection = FALSE;
-    if (![ScrollUtility sameSign_n:scrollDeltaAxis1 m:_previousScrollDeltaAxis1]) {
-        newScrollDirection = TRUE;
+    long long currTimeInMilliseconds = (long long)([[NSDate date] timeIntervalSince1970] * 1000.0);
+    
+    if ( ![ScrollUtility sameSign_n:scrollDeltaAxis1 m:_previousScrollDeltaAxis1] ) {
+        if ( _lastScrollTime > (currTimeInMilliseconds - 700) ) {
+//            NSLog(@"Spurious change of direction avoided");
+            return nil;
+        }
+        else {
+            newScrollDirection = TRUE;
+        }
     }
     _previousScrollDeltaAxis1 = scrollDeltaAxis1;
+    _lastScrollTime = currTimeInMilliseconds;
     
     
     // update global vars
